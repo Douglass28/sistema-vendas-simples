@@ -32,7 +32,7 @@ public class Pedido implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "pedido")
-    private Set<ItemPedido> itemPedidos = new HashSet<>();
+    private List<ItemPedido> itemPedidos = new ArrayList<>();
 
     public Pedido(Integer id, Instant data, Cliente cliente, StatusPagamento statusPagamento) {
         this.id = id;

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**  {
@@ -30,5 +31,5 @@ public class PedidoDTO {
 
     private Integer cliente;
     private StatusPagamento statusPagamento;
-    private Set<ItemPedidoDTO> itemPedidos;
+    private List<ItemPedidoDTO> itemPedidos;
 }

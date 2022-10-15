@@ -19,7 +19,7 @@ public class ItemPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;

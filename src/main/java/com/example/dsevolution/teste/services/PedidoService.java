@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class PedidoService {
         pedido.setStatusPagamento(dto.getStatusPagamento());
         pedido.setCliente(cliente);
 
-       Set<ItemPedido> itemsPedido = converteItems(pedido, dto.getItemPedidos());
+       List<ItemPedido> itemsPedido = converteItems(pedido, dto.getItemPedidos());
        pedidoRepository.save(pedido);
        itemPedidoRepository.saveAll(itemsPedido);
        pedido.setItemPedidos(itemsPedido);
@@ -50,7 +51,7 @@ public class PedidoService {
 
     }
 
-    private Set<ItemPedido> converteItems(Pedido pedido,  Set<ItemPedidoDTO> items){
+    private List<ItemPedido> converteItems(Pedido pedido,  List<ItemPedidoDTO> items){
         if (items.isEmpty()){
             throw new RegraNegocioException("Não é possivél criar pedido sem items.");
         }
@@ -66,7 +67,7 @@ public class PedidoService {
                     itemPedido.setQuatidade(dto.getQuantidade());
                     itemPedido.setProduto(produto);
                     return itemPedido;
-                }).collect(Collectors.toSet());
+                }).collect(Collectors.toList());
     }
 
 }
