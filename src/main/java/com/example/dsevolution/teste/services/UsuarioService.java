@@ -5,6 +5,8 @@ import com.example.dsevolution.teste.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -13,5 +15,9 @@ public class UsuarioService {
 
     public UsuarioSistema criandoUser (UsuarioSistema usuario){
         return repository.save(usuario);
+    }
+
+    public List<UsuarioSistema> listaUsers(){
+        return repository.findAll();
     }
 }

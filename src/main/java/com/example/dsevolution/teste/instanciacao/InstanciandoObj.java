@@ -12,6 +12,9 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 
+import static com.example.dsevolution.teste.entities.enums.Perfil.ROLE_ADMIN;
+import static com.example.dsevolution.teste.entities.enums.Perfil.ROLE_USER;
+
 @Configuration
 public class InstanciandoObj implements CommandLineRunner {
 
@@ -32,6 +35,9 @@ public class InstanciandoObj implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RolesRepository rolesRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -56,9 +62,16 @@ public class InstanciandoObj implements CommandLineRunner {
 
         produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
-        UsuarioSistema usuarioSistema = new UsuarioSistema(null, "brunão", "senha123");
+        Roles role1 = new Roles(null, ROLE_USER);
+        Roles role2 = new Roles(null, ROLE_ADMIN);
+
+        UsuarioSistema usuarioSistema = new UsuarioSistema(null, "douglas", "nova123");
         String password = passwordEncoder.encode(usuarioSistema.getPassword());
         usuarioSistema.setPassword(password);
+
+        usuarioSistema.getRoles().add(role1);
+        rolesRepository.saveAll(Arrays.asList(role1, role2));
         usuarioRepository.save(usuarioSistema);
+
     }
 }

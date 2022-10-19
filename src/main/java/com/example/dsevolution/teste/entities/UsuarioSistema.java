@@ -9,10 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class UsuarioSistema implements UserDetails, Serializable {
@@ -25,19 +26,21 @@ public class UsuarioSistema implements UserDetails, Serializable {
     @NotEmpty(message = "campo password deve ser preenchido.")
     private String password;
 
+    @ManyToMany
+    @JoinTable(name = "tb_user_role",
+    joinColumns = @JoinColumn(name = "usuario_id"),
+    inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    private List<Roles> roles = new ArrayList<>();
+
+    public UsuarioSistema(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getUsername(){
-        return this.username;
-    }
-
-    @Override
-    public String getPassword(){
-        return this.password;
+        return roles;
     }
 
     @Override
