@@ -65,13 +65,18 @@ public class InstanciandoObj implements CommandLineRunner {
         Roles role1 = new Roles(null, ROLE_USER);
         Roles role2 = new Roles(null, ROLE_ADMIN);
 
-        UsuarioSistema usuarioSistema = new UsuarioSistema(null, "douglas", "nova123");
-        String password = passwordEncoder.encode(usuarioSistema.getPassword());
-        usuarioSistema.setPassword(password);
+        UsuarioSistema usuarioSistema1 = new UsuarioSistema(null, "daniel", "nova123");
+        UsuarioSistema usuarioSistema2 = new UsuarioSistema(null, "carlinho", "nova123");
+        String password1 = passwordEncoder.encode(usuarioSistema1.getPassword());
+        String password2 = passwordEncoder.encode(usuarioSistema2.getPassword());
+        usuarioSistema1.setPassword(password1);
+        usuarioSistema2.setPassword(password2);
 
-        usuarioSistema.getRoles().add(role1);
+
+        usuarioSistema1.getRoles().add(role1);
+        usuarioSistema2.getRoles().add(role2);
         rolesRepository.saveAll(Arrays.asList(role1, role2));
-        usuarioRepository.save(usuarioSistema);
+        usuarioRepository.saveAll(Arrays.asList(usuarioSistema1, usuarioSistema2));
 
     }
 }
