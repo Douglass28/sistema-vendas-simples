@@ -1,17 +1,12 @@
 package com.example.dsevolution.teste.instanciacao;
 
-import com.example.dsevolution.teste.entities.Cliente;
-import com.example.dsevolution.teste.entities.ItemPedido;
-import com.example.dsevolution.teste.entities.Pedido;
-import com.example.dsevolution.teste.entities.Produto;
+import com.example.dsevolution.teste.entities.*;
 import com.example.dsevolution.teste.entities.enums.StatusPagamento;
-import com.example.dsevolution.teste.repositories.ClienteRepository;
-import com.example.dsevolution.teste.repositories.ItemPedidoRepository;
-import com.example.dsevolution.teste.repositories.PedidoRepository;
-import com.example.dsevolution.teste.repositories.ProdutoRepository;
+import com.example.dsevolution.teste.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -31,6 +26,12 @@ public class InstanciandoObj implements CommandLineRunner {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -55,5 +56,9 @@ public class InstanciandoObj implements CommandLineRunner {
 
         produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
+        UsuarioSistema usuarioSistema = new UsuarioSistema(null, "brunão", "senha123");
+        String password = passwordEncoder.encode(usuarioSistema.getPassword());
+        usuarioSistema.setPassword(password);
+        usuarioRepository.save(usuarioSistema);
     }
 }

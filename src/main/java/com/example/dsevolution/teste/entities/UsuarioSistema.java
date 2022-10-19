@@ -10,18 +10,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_usuario")
 public class UsuarioSistema implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Integer id;
     @NotEmpty(message = "campo username deve ser preenchido.")
     private String username;
     @NotEmpty(message = "campo password deve ser preenchido.")
