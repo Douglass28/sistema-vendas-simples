@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
