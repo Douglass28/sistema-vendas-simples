@@ -54,7 +54,7 @@ public class UsuarioResource {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping(value = "/{id]")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletaUsuario(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -35,21 +35,21 @@ public class ProdutoResource {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Produto>> buscarProdutoId(@PathVariable Integer id){
         Optional<Produto> produto = service.buscandoPorId(id);
         return ResponseEntity.ok().body(produto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Void> atualizaProduto(@PathVariable Integer id, @RequestBody Produto produto){
         service.upDate(id, produto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletaProduto(@PathVariable Integer id){
         service.deletaProduto(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
